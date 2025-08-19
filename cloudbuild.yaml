@@ -1,53 +1,56 @@
 steps:
   # Reservations
-  - name: 'gcr.io/cloud-builders/docker',
-    args: [
-      'build',
-      '-t',
-      'us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/reservations/production',
-      '-f',
-      'apps/reservations/Dockerfile',
-      '.'
-    ]
-  - name: 'gcr.io/cloud-builders/docker',
+  - name: gcr.io/cloud-builders/docker
     args:
-      ['push', 'us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/reservations/production']
+      - build
+      - -t
+      - us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/reservations/production
+      - -f
+      - apps/reservations/Dockerfile
+      - .
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/reservations/production
+
   # Payments
-  - name: 'gcr.io/cloud-builders/docker',
-    args: [
-      'build',
-      '-t',
-      'us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/payments/production',
-      '-f',
-      'apps/payments/Dockerfile',
-      '.'
-    ]
-  - name: 'gcr.io/cloud-builders/docker',
+  - name: gcr.io/cloud-builders/docker
     args:
-      [ 'push', 'us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/payments/production' ]
+      - build
+      - -t
+      - us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/payments/production
+      - -f
+      - apps/payments/Dockerfile
+      - .
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/payments/production
+
   # Notifications
-  - name: 'gcr.io/cloud-builders/docker',
-    args: [
-      'build',
-      '-t',
-      'us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/notifications/production',
-      '-f',
-      'apps/notifications/Dockerfile',
-      '.'
-    ]
-  - name: 'gcr.io/cloud-builders/docker',
+  - name: gcr.io/cloud-builders/docker
     args:
-      [ 'push', 'us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/notifications/production' ]
+      - build
+      - -t
+      - us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/notifications/production
+      - -f
+      - apps/notifications/Dockerfile
+      - .
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/notifications/production
+
   # Auth
-  - name: 'gcr.io/cloud-builders/docker',
-    args: [
-      'build',
-      '-t',
-      'us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/auth/production',
-      '-f',
-      'apps/auth/Dockerfile',
-      '.'
-    ]
-  - name: 'gcr.io/cloud-builders/docker',
+  - name: gcr.io/cloud-builders/docker
     args:
-      [ 'push', 'us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/auth/production' ]
+      - build
+      - -t
+      - us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/auth/production
+      - -f
+      - apps/auth/Dockerfile
+      - .
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/auth/production
