@@ -7,13 +7,7 @@ import { Connection } from 'mongoose';
   imports: [
     MongooseModule.forRootAsync({
       useFactory: (configService: ConfigService) => {
-        const user = configService.get<string>('MONGO_USER');
-        const password = configService.get<string>('MONGO_PASSWORD');
-        const host = configService.get<string>('MONGO_HOST');
-        const port = configService.get<string>('MONGO_PORT');
-        const db = configService.get<string>('MONGO_DB');
-
-        const uri = `mongodb://${user}:${password}@${host}:${port}/${db}?authSource=admin`;
+        const uri = configService.get<string>('MONGODB_URI');
         const isProd = configService.get<string>('NODE_ENV') === 'production';
         const logger = new Logger('Mongoose');
 
