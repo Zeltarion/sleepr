@@ -36,6 +36,7 @@ export class ReservationsController {
     return _user;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
     return this.reservationsService.findAll();

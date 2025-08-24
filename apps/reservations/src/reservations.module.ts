@@ -3,7 +3,12 @@ import { ReservationsService } from './reservations.service';
 import { ReservationsController } from './reservations.controller';
 // import { ClientsModule, Transport } from '@nestjs/microservices';
 // import { AuthClientModule } from '@app/common';
-import { AUTH_SERVICE, DatabaseModule, LoggerModule, PAYMENTS_SERVICE } from '@app/common';
+import {
+  AUTH_SERVICE,
+  DatabaseModule, HealthModule,
+  LoggerModule,
+  PAYMENTS_SERVICE,
+} from '@app/common';
 import {
   ReservationDocument,
   ReservationSchema,
@@ -55,6 +60,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         }),
       },
     ]),
+    HealthModule,
   ],
   controllers: [ReservationsController],
   providers: [ReservationsService, ReservationsRepository],

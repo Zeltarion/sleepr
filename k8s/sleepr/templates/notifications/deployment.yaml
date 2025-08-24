@@ -17,3 +17,22 @@ spec:
       containers:
       - image: us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/notifications/production
         name: notifications
+        env:
+          - name: PORT
+            value: '3000'
+          - name: GOOGLE_OAUTH_CLIENT_ID
+            value: 1080395470178-mhl9873bkaoidqqr3qh4gcaisoarjff6.apps.googleusercontent.com
+          - name: SMTP_USER
+            value: ownsleeprnestapp@gmail.com
+          - name: GOOGLE_OAUTH_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: google
+                key: clientSecret
+          - name: GOOGLE_OAUTH_REFRESH_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: google
+                key: refreshToken
+        ports:
+          - containerPort: 3000
