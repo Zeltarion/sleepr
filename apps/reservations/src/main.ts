@@ -18,6 +18,6 @@ async function bootstrap() {
     }),
   );
   app.useLogger(app.get(Logger));
-  await app.listen(configService.get('HTTP_PORT') as number);
+  await app.listen(configService.get('HTTP_PORT') as number, '0.0.0.0');
 }
 bootstrap();

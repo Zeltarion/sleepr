@@ -5,7 +5,8 @@ import { ReservationsController } from './reservations.controller';
 // import { AuthClientModule } from '@app/common';
 import {
   AUTH_SERVICE,
-  DatabaseModule, HealthModule,
+  DatabaseModule,
+  HealthModule,
   LoggerModule,
   PAYMENTS_SERVICE,
 } from '@app/common';
@@ -17,6 +18,7 @@ import { ReservationsRepository } from './reservations.repository';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { HealthController } from '@app/common/health/health.controller';
 
 @Module({
   imports: [

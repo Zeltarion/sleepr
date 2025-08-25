@@ -2,8 +2,13 @@ import { Controller, Get } from '@nestjs/common';
 
 @Controller()
 export class HealthController {
-  @Get()
+  constructor() {
+    console.log('HealthController loaded');
+  }
+
+  @Get('/health')
   health() {
-    return true;
+    console.log('HealthController loaded');
+    return { status: 'ok' };
   }
 }
