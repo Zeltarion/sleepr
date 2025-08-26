@@ -7,9 +7,9 @@ metadata:
 spec:
   ports:
   - name: "http"
-    port: 3003
+    port: 80
     protocol: TCP
     targetPort: 3003
   selector:
     app: auth
-  type: ClusterIP
+  type: NodePort

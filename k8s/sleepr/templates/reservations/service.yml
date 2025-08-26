@@ -4,14 +4,12 @@ metadata:
   labels:
     app: reservations
   name: reservations
-  annotations:
-    cloud.google.com/backend-config: '{"ports": {"http": "reservations-backendconfig"}}'
 spec:
   ports:
   - name: "http"
-    port: 3004
+    port: 80
     protocol: TCP
     targetPort: 3004
   selector:
     app: reservations
-  type: ClusterIP
+  type: NodePort

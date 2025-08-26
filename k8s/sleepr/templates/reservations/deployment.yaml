@@ -16,6 +16,7 @@ spec:
     spec:
       containers:
       - image: us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/reservations/production
+#      - image: nginxdemos/hello
         name: reservations
         env:
         - name: MONGODB_URI
@@ -33,17 +34,18 @@ spec:
           value: payments
         - name: PAYMENTS_PORT
           value: '3001'
-      ports:
+        ports:
         - containerPort: 3004
-      livenessProbe:
-        httpGet:
-          path: /health
-          port: 3004
-        initialDelaySeconds: 10
-        periodSeconds: 10
-      readinessProbe:
-        httpGet:
-          path: /health
-          port: 3004
-        initialDelaySeconds: 5
-        periodSeconds: 5
+#          - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3004
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3004
+          initialDelaySeconds: 5
+          periodSeconds: 5
