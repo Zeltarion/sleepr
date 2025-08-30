@@ -29,5 +29,7 @@ spec:
               secretKeyRef:
                 name: stripe
                 key: apiKey
+          - name: GLOBAL_PREFIX
+            value: payments
         ports:
         - containerPort: 3001

@@ -7,3 +7,4 @@ export * from './decorators';
 export * from './dto';
 export * from './models';
 export * from './health';
+export * from './bootstrap';

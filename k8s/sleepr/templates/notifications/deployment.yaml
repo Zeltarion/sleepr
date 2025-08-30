@@ -34,5 +34,7 @@ spec:
               secretKeyRef:
                 name: google
                 key: refreshToken
+          - name: GLOBAL_PREFIX
+            value: notifications
         ports:
           - containerPort: 3000

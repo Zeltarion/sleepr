@@ -28,6 +28,8 @@ spec:
               secretKeyRef:
                 name: jwt
                 key: jwtSecret
+          - name: GLOBAL_PREFIX
+            value: auth
           - name: JWT_EXPIRATION
             value: '3600'
           - name: TCP_PORT

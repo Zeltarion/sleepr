@@ -6,19 +6,17 @@ import { ReservationsController } from './reservations.controller';
 import {
   AUTH_SERVICE,
   DatabaseModule,
-  HealthModule,
   LoggerModule,
   PAYMENTS_SERVICE,
 } from '@app/common';
 import {
   ReservationDocument,
   ReservationSchema,
-} from './models/reservation.schema';
+} from '../models/reservation.schema';
 import { ReservationsRepository } from './reservations.repository';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { HealthController } from '@app/common/health/health.controller';
 
 @Module({
   imports: [
@@ -62,7 +60,6 @@ import { HealthController } from '@app/common/health/health.controller';
         }),
       },
     ]),
-    HealthModule,
   ],
   controllers: [ReservationsController],
   providers: [ReservationsService, ReservationsRepository],

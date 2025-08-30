@@ -24,6 +24,8 @@ spec:
             secretKeyRef:
               name: mongodb
               key: ConnectionString
+        - name: GLOBAL_PREFIX
+          value: reservations
         - name: HTTP_PORT
           value: '3004'
         - name: AUTH_HOST
