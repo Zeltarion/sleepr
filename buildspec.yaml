@@ -4,6 +4,7 @@ phases:
   pre_build:
     commands:
       - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 750246862798.dkr.ecr.us-west-2.amazonaws.com
+
   build:
     commands:
       - docker build -t reservations -f ./apps/reservations/Dockerfile .
@@ -17,6 +18,7 @@ phases:
 
       - docker build -t notifications -f ./apps/notifications/Dockerfile .
       - docker tag notifications:latest 750246862798.dkr.ecr.us-west-2.amazonaws.com/notifications:latest
+
   post_build:
     commands:
       - docker push 750246862798.dkr.ecr.us-west-2.amazonaws.com/reservations:latest
