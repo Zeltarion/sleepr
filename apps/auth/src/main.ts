@@ -9,7 +9,7 @@ import { applyGlobalPrefix } from '@app/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AuthModule);
-  applyGlobalPrefix(app);
+  // applyGlobalPrefix(app);
   const configService = app.get(ConfigService);
   app.connectMicroservice({
     transport: Transport.TCP,

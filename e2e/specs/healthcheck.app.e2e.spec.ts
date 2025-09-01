@@ -1,7 +1,11 @@
 describe('Health', () => {
   test('Reservations', async () => {
-    await new Promise((r) => setTimeout(r, 3000));
     const response = await fetch('http://reservations:3000/reservations/health');
-    expect(response.ok).toBeTruthy();
+    expect(response.status).toBe(200);
+  });
+
+  test('Auth', async () => {
+    const response = await fetch('http://auth:3001/auth/health');
+    expect(response.status).toBe(200);
   });
 });

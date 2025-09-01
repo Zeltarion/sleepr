@@ -7,7 +7,7 @@ import { applyGlobalPrefix } from '@app/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(PaymentsModule);
-  applyGlobalPrefix(app);
+  // applyGlobalPrefix(app);
   const configService = app.get(ConfigService);
   app.connectMicroservice({
     transport: Transport.TCP,
