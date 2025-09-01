@@ -38,7 +38,7 @@ async function bootstrap() {
           console.log(`${methods} ${layer.route.path}`);
         });
     } else {
-      console.warn('⚠️  _router.stack not found, возможно, маршруты ещё не зарегистрированы');
+      console.warn('⚠️  _router.stack not found');
     }
   }
 
