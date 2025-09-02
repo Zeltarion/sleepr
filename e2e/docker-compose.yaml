@@ -18,11 +18,11 @@ services:
       - '3000:3000'
   auth:
     image: us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/auth/production
-    build:
-      context: ../
-      dockerfile: apps/auth/Dockerfile
-      target: development
-    command: pnpm run start:dev auth
+#    build:
+#      context: ../
+#      dockerfile: apps/auth/Dockerfile
+#      target: development
+#    command: pnpm run start:dev auth
     env_file:
       - ../apps/auth/.env
     ports:

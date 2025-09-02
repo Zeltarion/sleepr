@@ -26,7 +26,6 @@ async function bootstrap() {
 
   await app.init();
   const adapter = app.getHttpAdapter();
-  console.log('!!!!!!!!!!');
   if (adapter.getType() === 'express') {
     const instance = adapter.getInstance();
 
