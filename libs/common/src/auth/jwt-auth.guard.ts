@@ -26,7 +26,16 @@ export class JwtAuthGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const req = context.switchToHttp().getRequest<RequestWithCookies>();
-    const jwt = req.cookies?.Authentication;
+    // // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    // const jwt =
+    //   req.cookies?.Authentication ||
+    //   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    //   context.switchToHttp().getResponse().headers?.authentication;
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const jwt =
+      context.switchToHttp().getRequest().cookies?.Authentication ||
+      context.switchToHttp().getRequest().headers?.authentication;
 
     if (!jwt) throw new UnauthorizedException('No token'); // ← не false
 

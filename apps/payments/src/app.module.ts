@@ -20,7 +20,7 @@ import { PaymentsModule } from './payments/payments.module';
             module: HealthModule,
           },
           {
-            path: '/',
+            path: '',
             module: PaymentsModule,
           },
         ],

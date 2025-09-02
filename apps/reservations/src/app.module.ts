@@ -20,7 +20,7 @@ import { HealthModule, LoggerModule } from '@app/common';
             module: HealthModule,
           },
           {
-            path: '/',
+            path: '',
             module: ReservationsModule,
           },
         ],

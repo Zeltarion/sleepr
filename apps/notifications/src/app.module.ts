@@ -20,7 +20,7 @@ import { NotificationsModule } from './notifications/notifications.module';
             module: HealthModule,
           },
           {
-            path: '/',
+            path: '',
             module: NotificationsModule,
           },
         ],

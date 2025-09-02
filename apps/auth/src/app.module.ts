@@ -21,11 +21,11 @@ import { UsersModule } from './users/users.module';
             module: HealthModule,
           },
           {
-            path: '/users',
+            path: 'users',
             module: UsersModule,
           },
           {
-            path: '/',
+            path: '',
             module: AuthModule,
           },
         ],
