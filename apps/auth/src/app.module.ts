@@ -4,6 +4,7 @@ import { RouterModule } from '@nestjs/core';
 
 import { HealthModule, LoggerModule } from '@app/common';
 import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -20,6 +21,10 @@ import { AuthModule } from './auth/auth.module';
             module: HealthModule,
           },
           {
+            path: '/users',
+            module: UsersModule,
+          },
+          {
             path: '/',
             module: AuthModule,
           },
@@ -27,6 +32,7 @@ import { AuthModule } from './auth/auth.module';
       },
     ]),
     HealthModule,
+    UsersModule,
     AuthModule,
   ],
 })

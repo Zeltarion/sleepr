@@ -7,8 +7,8 @@ services:
     depends_on:
       - reservations
       - auth
-      - payments
-      - notifications
+#      - payments
+#      - notifications
       - mongo
   reservations:
     image: us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/reservations/production
@@ -18,22 +18,32 @@ services:
       - '3000:3000'
   auth:
     image: us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/auth/production
+#    build:
+#      context: ../
+#      dockerfile: apps/auth/Dockerfile
+#      target: development
+#    command: pnpm run start:dev auth
     env_file:
       - ../apps/auth/.env
     ports:
       - '3001:3001'
     volumes:
       - ../dist/apps/auth:/usr/src/app/dist/apps/auth
+#      - ../:/usr/src/app
   payments:
     image: us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/payments/production
     env_file:
       - ../apps/payments/.env
+    ports:
+      - '3003:3003'
     volumes:
       - ../dist/apps/payments:/usr/src/app/dist/apps/payments
   notifications:
     image: us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/notifications/production
     env_file:
       - ../apps/notifications/.env
+    ports:
+      - '3004:3004'
     volumes:
       - ../dist/apps/notifications:/usr/src/app/dist/apps/notifications
   mongo:

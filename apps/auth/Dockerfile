@@ -35,3 +35,4 @@ RUN pnpm install --prod
 COPY --from=development /usr/src/app/dist ./dist
 
 CMD ["node", "dist/apps/auth/main"]
+#CMD ["sh", "-c", "node dist/apps/auth/main.js & tail -f /dev/null"]
