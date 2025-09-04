@@ -55,6 +55,10 @@ services:
       - '3306:3306'
     volumes:
       - ./mysql_data:/var/lib/mysql
+  rabbitmq:
+    image: rabbitmq
+    ports:
+      - '5672:5672'
 #  mongodb:
 #    image: mongo:6
 #    container_name: mongodb
