@@ -30,11 +30,12 @@ export class NotificationsService {
   }
 
   async notifyEmail({ email, text }: NotifyEmailDto): Promise<void> {
-    await this.transporter.sendMail({
-      from: this.configService.get<string>('SMTP_USER'),
-      to: email,
-      subject: 'Sleepr Notification',
-      text,
-    });
+    return Promise.resolve();
+    // await this.transporter.sendMail({
+    //   from: this.configService.get<string>('SMTP_USER'),
+    //   to: email,
+    //   subject: 'Sleepr Notification',
+    //   text,
+    // });
   }
 }

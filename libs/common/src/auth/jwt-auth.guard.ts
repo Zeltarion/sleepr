@@ -3,7 +3,7 @@ import {
   ExecutionContext,
   ForbiddenException,
   Inject,
-  Injectable,
+  Injectable, Logger,
   UnauthorizedException,
 } from '@nestjs/common';
 import {
@@ -18,11 +18,16 @@ import {
 import { AUTH_SERVICE } from '../constants';
 import { RequestWithCookies } from '../interfaces';
 import { ClientProxy } from '@nestjs/microservices';
-import { UserDto } from '@app/common/dto';
+import { Reflector } from '@nestjs/core';
+import { User } from '@app/common/models';
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
-  constructor(@Inject(AUTH_SERVICE) private readonly authClient: ClientProxy) {}
+  private readonly logger = new Logger(JwtAuthGuard.name);
+  constructor(
+    @Inject(AUTH_SERVICE) private readonly authClient: ClientProxy,
+    private readonly reflector: Reflector,
+  ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const req = context.switchToHttp().getRequest<RequestWithCookies>();
@@ -39,14 +44,24 @@ export class JwtAuthGuard implements CanActivate {
 
     if (!jwt) throw new UnauthorizedException('No token'); // ← не false
 
+    const roles = this.reflector.get<string[]>('roles', context.getHandler());
     try {
       const user = await firstValueFrom(
         this.authClient
-          .send<UserDto>('authenticate', { Authentication: jwt })
+          .send<User>('authenticate', { Authentication: jwt })
           .pipe(timeout(5000)),
       );
 
       if (!user) throw new UnauthorizedException('Invalid token');
+
+      if (roles) {
+        for (const role of roles) {
+          if (!user.roles?.map((role) => role.name).includes(role)) {
+            this.logger.error('Invalid role');
+            throw new UnauthorizedException();
+          }
+        }
+      }
 
       req.user = user;
       return true;

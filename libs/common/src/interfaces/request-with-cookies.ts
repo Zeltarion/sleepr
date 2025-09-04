@@ -1,9 +1,9 @@
 import { Request } from 'express';
-import { UserDto } from '@app/common/dto';
+import { User } from '@app/common/models';
 
 export interface RequestWithCookies extends Request {
   Authentication?: string;
-  user: UserDto;
+  user: User;
   cookies: {
     Authentication?: string;
   };

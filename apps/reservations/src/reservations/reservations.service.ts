@@ -9,10 +9,11 @@ import {
 import { CreateReservationDto } from '../dto/create-reservation.dto';
 import { UpdateReservationDto } from '../dto/update-reservation.dto';
 import { ReservationsRepository } from './reservations.repository';
-import { PAYMENTS_SERVICE, UserDto } from '@app/common';
+import { PAYMENTS_SERVICE, User } from '@app/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { catchError, firstValueFrom, map, throwError, timeout } from 'rxjs';
 import { omit } from 'lodash';
+import { Reservation } from '../models/reservation.entity';
 
 @Injectable()
 export class ReservationsService {
@@ -50,7 +51,7 @@ export class ReservationsService {
 
   async create(
     createReservationDto: CreateReservationDto,
-    { email, _id: userId }: UserDto,
+    { email, id: userId }: User,
   ) {
     try {
       const charge = await firstValueFrom(
@@ -83,8 +84,10 @@ export class ReservationsService {
 
       this.logger.debug(`Creating reservation: ${JSON.stringify(toCreate)}`);
 
-      const doc = await this.reservationsRepository.create(toCreate);
-      return (doc as any).toObject?.() ?? doc;
+      // const reservation = new Reservation(toCreate);
+      // const doc = await this.reservationsRepository.create(reservation);
+      // return (doc as any).toObject?.() ?? doc;
+      return this.reservationsRepository.createAndSave(toCreate);
     } catch (e: any) {
       // Единая обработка ошибок (и платежа, и БД)
       this.logger.error(`Failed to create reservation`, e?.stack || e);
@@ -111,18 +114,18 @@ export class ReservationsService {
     return this.reservationsRepository.find({});
   }
 
-  findOne(_id: string) {
-    return this.reservationsRepository.findOne({ _id });
+  findOne(id: number) {
+    return this.reservationsRepository.findOne({ id });
   }
 
-  update(_id: string, updateReservationDto: UpdateReservationDto) {
+  update(id: number, updateReservationDto: UpdateReservationDto) {
     return this.reservationsRepository.findOneAndUpdate(
-      { _id },
-      { $set: updateReservationDto },
+      { id },
+      updateReservationDto,
     );
   }
 
-  remove(_id: string) {
-    return this.reservationsRepository.findOneAndDelete({ _id });
+  remove(id: number) {
+    return this.reservationsRepository.findOneAndDelete({ id });
   }
 }

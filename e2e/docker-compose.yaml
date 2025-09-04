@@ -1,5 +1,9 @@
 services:
   e2e:
+    command: >
+      sh -c "
+      wait-on http://auth:3001/auth/health &&
+      pnpm test"
     build:
       dockerfile: ./Dockerfile
     volumes:
@@ -17,19 +21,19 @@ services:
     ports:
       - '3000:3000'
   auth:
-    image: us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/auth/production
-#    build:
-#      context: ../
-#      dockerfile: apps/auth/Dockerfile
-#      target: development
-#    command: pnpm run start:dev auth
+#    image: us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/auth/production
+    build:
+      context: ../
+      dockerfile: apps/auth/Dockerfile
+      target: development
+    command: pnpm run start:dev auth
     env_file:
       - ../apps/auth/.env
     ports:
       - '3001:3001'
     volumes:
-      - ../dist/apps/auth:/usr/src/app/dist/apps/auth
-#      - ../:/usr/src/app
+#      - ../dist/apps/auth:/usr/src/app/dist/apps/auth
+      - ../:/usr/src/app
   payments:
     image: us-east4-docker.pkg.dev/boxwood-diagram-469015-a2/payments/production
     env_file:
